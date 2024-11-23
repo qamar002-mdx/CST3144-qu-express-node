@@ -16,16 +16,7 @@ app.use(morgan("short"));
 app.use(express.json());
 
 // setup cors
-const corsOptions = {
-    origin: [
-        "https://qamar002-mdx.github.io", // Allow GitHub Pages origin
-        "http://localhost:3000"          // Allow localhost during testing
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"], // HTTP methods allowed
-    allowedHeaders: ["Content-Type", "Authorization"] // Headers allowed
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 // setup properties for properties files
 // Reading MongoDB connection details from db.properties
