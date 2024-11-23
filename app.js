@@ -6,7 +6,7 @@ const cors = require("cors");
 const { MongoClient, ObjectId } = require("mongodb"); // MongoDB driver
 const PropertiesReader = require("properties-reader");
 
-// setup express
+// setup express dfffd
 const app = express();
 
 // setup morgan for log
@@ -192,7 +192,7 @@ app.get("/search", async (req, res) => {
     }
 
     try {
-        const results = await db.collection("products").find({
+        const results = await db.collection("products").find({ 
             $or: [
                 { title: { $regex: query, $options: "i" } },              // Search in title
                 { description: { $regex: query, $options: "i" } },       // Search in description
