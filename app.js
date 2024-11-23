@@ -6,7 +6,7 @@ const cors = require("cors");
 const { MongoClient, ObjectId } = require("mongodb"); // MongoDB driver
 const PropertiesReader = require("properties-reader");
 
-// setup express express
+// setup express
 const app = express();
 
 // setup morgan for log
