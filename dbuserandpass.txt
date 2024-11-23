@@ -1,0 +1,8 @@
+username: qamar002 
+pass: Myonlineshop 
+db: myonlineshop
+
+mongodb+srv://qamar002:<db_password>@myonlineshop.d0mgp.mongodb.net/
+
+
+mongodb+srv://qamar002:<db_password>@myonlineshop.d0mgp.mongodb.net/?retryWrites=true&w=majority&appName=Myonlineshop
