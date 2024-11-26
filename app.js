@@ -91,12 +91,12 @@ app.post("/products", async (req, res) => {
 
 // PUT route to update an existing product in the 'product' collection
 app.put("/products/:id", async (req, res) => {
-    const productId = parseInt(req.params.id); // ID as integer
+    const productId = req.params.id; // ID as string from URL params
     const updatedData = req.body;
 
     try {
         const result = await db.collection("products").updateOne(
-            { id: productId }, // Query using 'id'
+            { _id: new ObjectId(productId) }, // Query using ObjectId
             { $set: updatedData }
         );
 
@@ -135,12 +135,12 @@ app.post("/orders", async (req, res) => {
         const session = client.startSession(); // MongoDB transaction session
         session.startTransaction();
 
-        const productsCollection = db.collection("products"); //console
+        const productsCollection = db.collection("products");
         const ordersCollection = db.collection("orders");
 
         // Loop through productIDs and quantities
         for (let i = 0; i < newOrder.productIDs.length; i++) {
-            const productId = newOrder.productIDs[i];  
+            const productId = newOrder.productIDs[i];
             const orderedQuantity = newOrder.quantities[i];
 
             // Fetch product from DB
@@ -178,6 +178,27 @@ app.post("/orders", async (req, res) => {
     } catch (error) {
         console.error("Error processing order:", error);
         res.status(500).json({ error: "Failed to process order" });
+    }
+});
+
+app.put("/orders/:id", async (req, res) => {
+    const orderId = req.params.id; // Order ID from URL params
+    const updatedData = req.body; // New data to update
+
+    try {
+        const result = await db.collection("orders").updateOne(
+            { _id: new ObjectId(orderId) }, // Query using MongoDB ObjectId
+            { $set: updatedData } // Update only the specified fields
+        );
+
+        if (result.matchedCount === 0) {
+            return res.status(404).send("Order not found");
+        }
+
+        res.json({ success: true, message: "Order updated successfully" });
+    } catch (error) {
+        console.error("Error updating order:", error);
+        res.status(500).send("Error updating order");
     }
 });
 
