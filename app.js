@@ -140,7 +140,7 @@ app.post("/orders", async (req, res) => {
 
         // Loop through productIDs and quantities
         for (let i = 0; i < newOrder.productIDs.length; i++) {
-            const productId = newOrder.productIDs[i];
+            const productId = newOrder.productIDs[i];  
             const orderedQuantity = newOrder.quantities[i];
 
             // Fetch product from DB
