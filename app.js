@@ -135,7 +135,7 @@ app.post("/orders", async (req, res) => {
         const session = client.startSession(); // MongoDB transaction session
         session.startTransaction();
 
-        const productsCollection = db.collection("products");
+        const productsCollection = db.collection("products"); //console
         const ordersCollection = db.collection("orders");
 
         // Loop through productIDs and quantities
